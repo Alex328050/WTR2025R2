@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-12 19:15:14
+ * @LastEditTime: 2025-03-18 22:17:40
  */
 
 #include "UnitreeInitTask.h"
@@ -27,7 +27,11 @@ void UnitreeInitTask(void *argument)
   while(Unitree_init(&myMotor0, &huart6, 0) == HAL_ERROR)
   {
     ++flag_unitreeInitOutOfTime;
-    if (flag_unitreeInitOutOfTime >= 10)  throwhsm.wholestate = WHOLE_ERROR;
+    if (flag_unitreeInitOutOfTime >= 10)
+    {
+        throwhsm.wholestate = WHOLE_ERROR;
+        break;
+    }
     osDelay(1000);
   }
   

@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-16 00:43:24
+ * @LastEditTime: 2025-03-18 23:07:23
  */
 
 #include "BounceTask.h"
@@ -31,10 +31,10 @@ void BounceTask(void* argument)
             }
             else if (throwhsm.bouncestate == BOUNCE_READY)
             {
-                while (flag_countUnitreeRelease < 50)
+                while (flag_countUnitreeRelease < 100)
                 {
-                    hDJI[2].speedPID.output = 5000;
-                    hDJI[3].speedPID.output = -5000;
+                    hDJI[2].speedPID.output = 8000;
+                    hDJI[3].speedPID.output = -8000;
                     positionServo(-85.4, &hDJI[1]);
                     Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
                     Unitree_ChangeState(&myMotor1, 1, 1, 2.2, 0.15, unitreeStartPos0+1.6, 0.6, 0.15);
@@ -50,7 +50,7 @@ void BounceTask(void* argument)
             }
             else if (throwhsm.bouncestate == BOUNCE_BOUNCE)
             {
-                while (flag_countBounceCylinderContract < 50)
+                while (flag_countBounceCylinderContract < 100)
                 {
                     hDJI[1].speedPID.output = 9000;
                     HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_SET);
@@ -59,7 +59,7 @@ void BounceTask(void* argument)
                 }
                 HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_RESET);
                 hDJI[1].speedPID.output = 0;
-                // osDelay(200);//传感器信号延迟打开（未测试）
+                osDelay(150);//传感器信号延迟打开（未测试）
                 externFlag_startSensor = 1;
             }
             else if (throwhsm.bouncestate == BOUNCE_CATCHANDADJUSTPOSTURE)

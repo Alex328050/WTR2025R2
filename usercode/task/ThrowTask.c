@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-16 00:14:42
+ * @LastEditTime: 2025-03-18 22:56:59
  */
 
 #include "ThrowTask.h"
@@ -66,7 +66,7 @@ void ThrowTask(void *argument)
         {
             speedServo(0, &hDJI[0]);
             Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
-            Unitree_ChangeState(&myMotor1, 1, 1, 0, -0.5, unitreeStartPos1, 0.25, 0.05);
+            Unitree_ChangeState(&myMotor1, 1, 1, 0, -0.5, unitreeStartPos1, 0.5, 0.05);
             while (flag_countPawlDelay < 100)
             {
                 hDJI[1].speedPID.output = -8000;
