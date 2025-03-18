@@ -59,6 +59,7 @@ void BounceTask(void* argument)
                 }
                 HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_RESET);
                 hDJI[1].speedPID.output = 0;
+                // osDelay(200);//传感器信号延迟打开（未测试）
                 externFlag_startSensor = 1;
             }
             else if (throwhsm.bouncestate == BOUNCE_CATCHANDADJUSTPOSTURE)
@@ -70,6 +71,7 @@ void BounceTask(void* argument)
                     osDelay(2);
                 }
                 positionServo(-85.4, &hDJI[1]);
+                HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET);
                 speedServo(5000, &hDJI[0]);
             }
             osDelay(2);

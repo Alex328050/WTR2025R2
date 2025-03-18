@@ -60,7 +60,7 @@ void ThrowHSMTask(void* argument)
             else if (throwhsm.bouncestate == BOUNCE_CATCHING && rmctl.rmctl_msg.btn_Btn0 == 1)  throwhsm.bouncestate = BOUNCE_GETTOPOSITION;
             else if (throwhsm.bouncestate == BOUNCE_GETTOPOSITION && rmctl.rmctl_msg.btn_Btn1 == 1)  throwhsm.bouncestate = BOUNCE_READY;
             else if (throwhsm.bouncestate == BOUNCE_READY && rmctl.rmctl_msg.btn_Btn2 == 1)  throwhsm.bouncestate = BOUNCE_BOUNCE;
-            else if (throwhsm.bouncestate == BOUNCE_BOUNCE && externFlag_startSensor == 1 && HAL_GPIO_ReadPin(PNPSensor_GPIO_Port,PNPSensor_Pin) == GPIO_PIN_SET)
+            else if (throwhsm.bouncestate == BOUNCE_BOUNCE && externFlag_startSensor == 1 && (HAL_GPIO_ReadPin(PNPSensor1_GPIO_Port, PNPSensor1_Pin) == GPIO_PIN_SET || HAL_GPIO_ReadPin(PNPSensor2_GPIO_Port, PNPSensor2_Pin) == GPIO_PIN_SET))
             {
                 throwhsm.bouncestate = BOUNCE_CATCHANDADJUSTPOSTURE;
             }

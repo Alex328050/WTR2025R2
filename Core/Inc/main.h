@@ -61,14 +61,16 @@ void Error_Handler(void);
 #define RE_GPIO_Port GPIOC
 #define DE_Pin GPIO_PIN_1
 #define DE_GPIO_Port GPIOC
+#define PNPSensor2_Pin GPIO_PIN_2
+#define PNPSensor2_GPIO_Port GPIOC
 #define CYLIN_Pin GPIO_PIN_3
 #define CYLIN_GPIO_Port GPIOC
 #define LED1_Pin GPIO_PIN_1
 #define LED1_GPIO_Port GPIOG
 #define BOUNCE_Pin GPIO_PIN_4
 #define BOUNCE_GPIO_Port GPIOC
-#define PNPSensor_Pin GPIO_PIN_5
-#define PNPSensor_GPIO_Port GPIOC
+#define PNPSensor1_Pin GPIO_PIN_5
+#define PNPSensor1_GPIO_Port GPIOC
 #define LED_GREEN_Pin GPIO_PIN_14
 #define LED_GREEN_GPIO_Port GPIOF
 
