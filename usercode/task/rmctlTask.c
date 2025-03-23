@@ -1,6 +1,4 @@
-#include "AllUserTask.h"
-#include "HSM.h"
-#include "rmctl.h"
+#include "RmctlTask.h"
 
 /**
  * @brief 遥控器线程

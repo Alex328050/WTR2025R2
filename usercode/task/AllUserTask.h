@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-10 22:30:13
+ * @LastEditTime: 2025-03-23 21:57:02
  */
 #ifndef ALLUSERTASK_H
 #define ALLUSERTASK_H
@@ -23,11 +23,11 @@ extern "C"
 #include "main.h"
 #include "cmsis_os.h"
 
-#include "UnitreeInitTask.h"
-#include "DJIInitTask.h"
+#include "InitTask.h"
 #include "ThrowHSMTask.h"
 #include "UnitreeExecutorTask.h"
 #include "DJIExecutorTask.h"
+#include "RmctlTask.h"
 #include "ThrowTask.h"
 #include "ReadyTask.h"
 #include "BounceTask.h"
@@ -35,10 +35,7 @@ extern "C"
 void User_FREERTOS_Init(void);
 void HsmTask(void *argument);
 // void ChassisTask(void *argument);
-void RmctlTask(void *argument);
 // void PopTask(void *argument);
-void BounceTask(void *argument);
-void Catchingtask(void *argument);
 #ifdef __cplusplus
 }
 #endif

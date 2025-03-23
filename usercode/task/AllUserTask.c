@@ -3,23 +3,16 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-15 23:49:03
+ * @LastEditTime: 2025-03-23 23:37:51
  */
 #include "AllUserTask.h"
 
-/* 宇树电机初始化 */
-osThreadId_t UnitreeInitTaskHandle;
-const osThreadAttr_t UnitreeInitTask_attributes = {
-  .name = "UnitreeInitTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
-};
-/* 大疆电机初始化 */
-osThreadId_t DJIInitTaskHandle;
-const osThreadAttr_t DJIInitTask_attributes = {
-  .name = "DJIInitTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityRealtime,
+/*各部件初始化线程*/
+osThreadId_t InitTaskHandle;
+const osThreadAttr_t InitTask_attributes = {
+    .name = "InitTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t) osPriorityRealtime,
 };
 /* 状态机 */
 osThreadId_t hsmtaskHandle;
@@ -91,7 +84,7 @@ const osThreadAttr_t CatchingTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-
+/*准备线程*/
 osThreadId_t ReadyTaskHandle;
 const osThreadAttr_t ReadyTask_attributes = {
     .name = "ReadyTask",
@@ -105,8 +98,7 @@ const osThreadAttr_t ReadyTask_attributes = {
  */
 void User_FREERTOS_Init(void)
 {
-    UnitreeInitTaskHandle = osThreadNew(UnitreeInitTask, NULL, &UnitreeInitTask_attributes);
-    DJIInitTaskHandle = osThreadNew(DJIInitTask, NULL, &DJIInitTask_attributes);
+    InitTaskHandle = osThreadNew(InitTask, NULL, &InitTask_attributes);
 
     // hsmtaskHandle = osThreadNew(HsmTask, NULL, &hsmtask_attributes);
     rmctltaskHandle = osThreadNew(RmctlTask, NULL, &rmctltask_attributes);
@@ -119,7 +111,6 @@ void User_FREERTOS_Init(void)
     BounceTaskHandle = osThreadNew(BounceTask, NULL, &BounceTask_attributes);
     ReadyTaskHandle = osThreadNew(ReadyTask, NULL, &ReadyTask_attributes);
     // chassistaskHandle = osThreadNew(ChassisTask, NULL, &chassistask_attributes);
-    // CatchingTaskHandle = osThreadNew(Catchingtask, NULL, &CatchingTask_attributes);
     // poptaskHandle = osThreadNew(PopTask, NULL, &poptask_attributes);
     
 }

@@ -81,7 +81,16 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-  ENCODER_CANFilterInit(&hcan2);
+  if (CANFilterInit(&hcan1) == HAL_ERROR)
+  {
+    throwhsm.wholestate = WHOLE_ERROR;
+    throwhsm.errorstate = ERROR_CANINITFAIL1;
+  }
+  if (ENCODER_CANFilterInit(&hcan2) == HAL_ERROR)
+  {
+    throwhsm.wholestate = WHOLE_ERROR;
+    throwhsm.errorstate = ERROR_CANINITFAIL2;
+  }
   HAL_CAN_Start(&hcan2); // 启动CAN外设
   HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING); // 启用接收FIFO0的中断
   /* USER CODE END Init */

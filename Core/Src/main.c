@@ -104,13 +104,6 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   RetargetInit(&huart8);
-  CANFilterInit(&hcan1); 
-  hDJI[0].motorType = M2006;//自旋电机
-  hDJI[1].motorType = M3508;
-  hDJI[2].motorType = M2006;//支撑右电机
-  hDJI[3].motorType = M2006;
-  DJI_Init();
-
   throwhsm.wholestate = WHOLE_INITING;
   /* USER CODE END 2 */
 

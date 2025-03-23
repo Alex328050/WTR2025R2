@@ -19,7 +19,7 @@ void ReadyTask(void* argument)
             {
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
                 Unitree_ChangeState(&myMotor1, 1, 1, 0, 0, 0, 0, 0);
-                speedServo(0, &hDJI[0]);
+                hDJI[0].speedPID.output = 0;
                 hDJI[2].speedPID.output = -8000;
                 hDJI[3].speedPID.output = 8000;
                 positionServo(0, &hDJI[1]);
@@ -28,7 +28,7 @@ void ReadyTask(void* argument)
             }
             Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
             Unitree_ChangeState(&myMotor1, 1, 1, 0, 0, 0, 0, 0);
-            speedServo(0, &hDJI[0]);
+            hDJI[0].speedPID.output = 0;
             hDJI[2].speedPID.output = 0;
             hDJI[3].speedPID.output = 0;
             positionServo(0, &hDJI[1]);

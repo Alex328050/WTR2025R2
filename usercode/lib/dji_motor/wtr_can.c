@@ -24,17 +24,17 @@ HAL_StatusTypeDef CANFilterInit(CAN_HandleTypeDef* hcan){
 	
   if(HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK)
   {
-    Error_Handler();
+    return HAL_ERROR;
   }
 
   if (HAL_CAN_Start(hcan) != HAL_OK)
   {
-    Error_Handler();
+    return HAL_ERROR;
   }
 	
   if (HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
   {
-    Error_Handler();
+    return HAL_ERROR;
   }
 	return HAL_OK;
 }

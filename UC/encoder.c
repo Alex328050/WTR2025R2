@@ -17,9 +17,6 @@ HAL_StatusTypeDef ENCODER_CANFilterInit(CAN_HandleTypeDef* hcan) {
     sFilterConfig.FilterIdHigh = (0x50 << 5); // 左移 5 位
     sFilterConfig.FilterIdLow = 0x0000;
 
-    // 设置掩码为 0xFFFF，表示匹配所有位
-    // sFilterConfig.FilterMaskIdHigh = 0xFFFF;
-    // sFilterConfig.FilterMaskIdLow = 0xFFFF;
     sFilterConfig.FilterMaskIdHigh = 0x0000;
     sFilterConfig.FilterMaskIdLow = 0x0000;
 
@@ -28,97 +25,19 @@ HAL_StatusTypeDef ENCODER_CANFilterInit(CAN_HandleTypeDef* hcan) {
     sFilterConfig.SlaveStartFilterBank = 28;
 
     if (HAL_CAN_ConfigFilter(hcan, &sFilterConfig) != HAL_OK) {
-        Error_Handler();
+        return HAL_ERROR;
     }
 
     if (HAL_CAN_Start(hcan) != HAL_OK) {
-        Error_Handler();
+        return HAL_ERROR;
     }
 
     if (HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK) {
-        Error_Handler();
+        return HAL_ERROR;
     }
 
     return HAL_OK;
 }
-// void CheckCANError() {
-//     uint32_t errorCode = HAL_CAN_GetError(&hcan2);
-//     // 检查是否有错误
-//     if (errorCode != HAL_CAN_ERROR_NONE) {
-//         // 打印错误状态
-//         printf("CAN Error Code: %lu\n", errorCode);
-//         // 检查特定的错误类型
-//         if (errorCode & HAL_CAN_ERROR_EWG) {
-//             printf("Error Warning Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_EPV) {
-//             printf("Error Passive Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_BOF) {
-//             printf("Bus Off Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_ACK) {
-//             printf("ACK Error Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_STF) {
-//             printf("Stuff Error Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_FOR) {
-//             printf("Form Error Flag set\n");
-//         }
-//         if (errorCode & HAL_CAN_ERROR_BR) {
-//             printf("Bit Recessive Error Flag set\n");
-//         }
-//         // 去掉 HAL_CAN_ERROR_BS 和 HAL_CAN_ERROR_ID
-//         if (errorCode & HAL_CAN_ERROR_CRC) {
-//             printf("CRC Error Flag set\n");
-//         }
-//     } else {
-//         printf("No CAN errors detected\n");
-//     }
-// }
-
-// void ReceiveCANData(CAN_HandleTypeDef* hcan, EncoderData* data) {
-//     CAN_RxHeaderTypeDef RxHeader;
-//     uint8_t RxData[8];
-//     CheckCANError();
-//     // 检查接收FIFO是否有消息
-//     if (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO0) > 0) {
-//         // 接收消息
-//         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
-//             printf("Received message: ");
-//             for (int i = 0; i < RxHeader.DLC; i++) {
-//                 printf("%02X ", RxData[i]);
-//             }
-//             printf("\n");
-//             // 解析数据
-//             if (RxData[0] == 0x55 && RxData[1] == 0x55) {
-//                 uint16_t angleReg = (RxData[2] << 8) | RxData[3];
-//                 data->angle = angleReg * 360.0f / 32768.0f;
-//                 uint16_t angularSpeedReg = (RxData[4] << 8) | RxData[5];
-//                 data->angularSpeed = angularSpeedReg * 360.0f / 32768.0f / 0.1f;
-//                 data->revolutions = (RxData[6] << 8) | RxData[7];
-//             } else if (RxData[0] == 0x55 && RxData[1] == 0x56) {
-//                 uint16_t tempReg = (RxData[2] << 8) | RxData[3];
-//                 data->temperature = tempReg / 100.0f;
-//             }
-//         } else {
-//             printf("Failed to get message from FIFO\n");
-//         }
-//     } else {
-//         printf("No message in FIFO\n");
-//     }
-//     if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
-//           // 处理接收到的数据
-//           printf("Received message ID: %X, Data: ", RxHeader.StdId);
-//           for (int i = 0; i < RxHeader.DLC; i++) {
-//               printf("%02X ", RxData[i]);
-//           }
-//           printf("\n");
-//       } else {
-//           printf("Failed to get message from FIFO\n");
-//       }
-// }
 
 void ParseCANData(CAN_RxHeaderTypeDef *RxHeader, uint8_t *RxData, EncoderData *data,EncoderCalculateData *caldata) {
     // 解析数据
@@ -153,30 +72,6 @@ void ParseCANData(CAN_RxHeaderTypeDef *RxHeader, uint8_t *RxData, EncoderData *d
     }
 }
 
-// void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
-//     CAN_RxHeaderTypeDef RxHeader;
-//     uint8_t RxData[8];
-//     EncoderData data;
-//     CheckCANError();
-//     检查接收FIFO是否有消息
-//     if (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO0) > 0) {
-//         // 接收消息
-//         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RxHeader, RxData) == HAL_OK) {
-//             printf("Received message ID: %X, Data: ", RxHeader.StdId);
-//             for (int i = 0; i < RxHeader.DLC; i++) {
-//                 printf("%02X ", RxData[i]);
-//             }
-//             printf("\n");
-//             // 解析数据
-//             ParseCANData(&RxHeader, RxData, &data);
-//         } else {
-//             printf("Failed to get message from FIFO\n");
-//         }
-//     } else {
-//         printf("No message in FIFO\n");
-//     }
-// }
-
 // 发送配置命令的函数
 HAL_StatusTypeDef SendConfigCommand(CAN_HandleTypeDef* hcan, uint8_t* command, uint8_t length) {
     CAN_TxHeaderTypeDef TxHeader;
@@ -191,7 +86,7 @@ HAL_StatusTypeDef SendConfigCommand(CAN_HandleTypeDef* hcan, uint8_t* command, u
 
 //该角编码器是掉电保存配置，只需要配置一次即可
 //白线置零也会置零波特率
-void Encoder_Init(CAN_HandleTypeDef* hcan) {
+void Encoder_Setup(CAN_HandleTypeDef* hcan) {
     HAL_StatusTypeDef status;
 
     // Step 1: 解锁
@@ -254,4 +149,10 @@ void Encoder_Init(CAN_HandleTypeDef* hcan) {
     HAL_Delay(10);
 
     DEBUG_PRINT("Encoder Initialization Complete\n");
+}
+
+HAL_StatusTypeDef Encoder_Init(void)
+{    
+    if (caldata.angle > 19000 || caldata.angle < 17000) return HAL_ERROR;
+    else return HAL_OK; 
 }

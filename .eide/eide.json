@@ -8,7 +8,8 @@
     "Middlewares",
     "usercode",
     "UC",
-    "Unitree_SDK"
+    "Unitree_SDK",
+    "usercode/task"
   ],
   "virtualFolder": {
     "name": "<virtual_root>",

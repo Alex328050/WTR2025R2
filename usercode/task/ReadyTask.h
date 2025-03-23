@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-15 23:47:30
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-15 23:52:04
+ * @LastEditTime: 2025-03-23 21:57:18
  */
 
 #ifndef READYTASK_H
@@ -14,7 +14,7 @@
 #include "Unitree_user.h"
 #include "ThrowHSM.h"
 #include "AllUserTask.h"
-#include "UnitreeInitTask.h"
+#include "InitTask.h"
 
 void ReadyTask(void* argument);
 

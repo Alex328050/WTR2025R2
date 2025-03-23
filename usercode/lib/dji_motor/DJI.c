@@ -11,7 +11,7 @@ static uint32_t TxMailbox;
  * @brief	DJI电机初始化函数
  * @note    使用前应对全局变量hDJI进行类型初始化
  */
-void DJI_Init()
+HAL_StatusTypeDef DJI_Init()
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -39,6 +39,34 @@ void DJI_Init()
 
 		hDJI[i].encoder_resolution = 8192.0f;
 	}
+    /*夹爪电机参数初始化 */
+    hDJI[0].posPID.outputMax=4000;
+    hDJI[0].posPID.KP=60;
+    hDJI[0].posPID.KI=3;
+    hDJI[0].posPID.KD=0.0;
+    hDJI[0].speedPID.outputMax=4000;
+    hDJI[0].speedPID.KI=0.4;
+    hDJI[0].speedPID.KD=0.4;
+    hDJI[0].speedPID.KP=12;
+
+    /*自旋电机参数初始化*/
+    hDJI[1].posPID.outputMax=4000;
+    hDJI[1].posPID.KP=60;
+    hDJI[1].posPID.KI=3;
+    hDJI[1].posPID.KD=0.0;
+    hDJI[1].speedPID.outputMax=4000;
+    hDJI[1].speedPID.KI=0.4;
+    hDJI[1].speedPID.KD=0.4;
+    hDJI[1].speedPID.KP=12;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (hDJI[i].FdbData.rpm < -50 || hDJI[i].FdbData.rpm > 50 || hDJI[i].FdbData.current >9000 || hDJI[i].FdbData.current < -9000) // 允许小范围浮动
+        {
+            return HAL_ERROR;
+        }
+    }
+    return HAL_OK;
 }
 
 /**
@@ -70,7 +98,8 @@ void CanTransmit_DJI_1234(CAN_HandleTypeDef *hcanx, int16_t cm1_iq, int16_t cm2_
 	}
 	if (HAL_CAN_AddTxMessage(hcanx, &TxMessage, TxData, &TxMailbox) != HAL_OK)
 	{
-		Error_Handler(); // 如果CAN信息发送失败则进入死循环
+		throwhsm.wholestate = WHOLE_ERROR;
+        throwhsm.errorstate = ERROR_DJITRANSMITFAIL;
 	}
 }
 
@@ -102,7 +131,8 @@ void CanTransmit_DJI_5678(CAN_HandleTypeDef *hcanx, int16_t cm5_iq, int16_t cm6_
 		;
 	if (HAL_CAN_AddTxMessage(hcanx, &TxMessage, TxData, &TxMailbox) != HAL_OK)
 	{
-		Error_Handler(); // 如果CAN信息发送失败则进入死循环
+		throwhsm.wholestate = WHOLE_ERROR;
+        throwhsm.errorstate = ERROR_DJITRANSMITFAIL;
 	}
 }
 

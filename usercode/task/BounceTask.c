@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-18 23:07:23
+ * @LastEditTime: 2025-03-23 23:24:07
  */
 
 #include "BounceTask.h"
@@ -22,12 +22,14 @@ void BounceTask(void* argument)
             if (throwhsm.bouncestate == BOUNCE_CATCHING)
             {
                 positionServo(-85.4, &hDJI[1]);
+                speedServo(5000, &hDJI[0]);
             }
             else if (throwhsm.bouncestate == BOUNCE_GETTOPOSITION)
             {
                 positionServo(-85.4, &hDJI[1]);
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
-                Unitree_ChangeState(&myMotor1, 1, 1, 2.2, 0.15, unitreeStartPos0+1.6, 0.6, 0.15);
+                Unitree_ChangeState(&myMotor1, 1, 1, 2.2, 0.15, unitreeStartPos1+1.6, 0.55, 0.15);
+                hDJI[0].speedPID.output = 0;
             }
             else if (throwhsm.bouncestate == BOUNCE_READY)
             {
@@ -36,8 +38,6 @@ void BounceTask(void* argument)
                     hDJI[2].speedPID.output = 8000;
                     hDJI[3].speedPID.output = -8000;
                     positionServo(-85.4, &hDJI[1]);
-                    Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
-                    Unitree_ChangeState(&myMotor1, 1, 1, 2.2, 0.15, unitreeStartPos0+1.6, 0.6, 0.15);
                     ++flag_countUnitreeRelease;
                     osDelay(2);
                 }
@@ -46,20 +46,20 @@ void BounceTask(void* argument)
                 positionServo(-85.4, &hDJI[1]);
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
                 Unitree_ChangeState(&myMotor1, 1, 1, 0, 0, 0, 0, 0);
-                HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_SET);
+                HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_SET);  //伸缩气缸推出
             }
             else if (throwhsm.bouncestate == BOUNCE_BOUNCE)
             {
                 while (flag_countBounceCylinderContract < 100)
                 {
                     hDJI[1].speedPID.output = 9000;
-                    HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_SET);
+                    HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_SET);  //拍球气缸推出
                     ++flag_countBounceCylinderContract;
                     osDelay(2);
                 }
-                HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_RESET);  //拍球气缸收回
                 hDJI[1].speedPID.output = 0;
-                osDelay(150);//传感器信号延迟打开（未测试）
+                osDelay(150);//传感器信号延迟，由于传感器信号传输需要时间
                 externFlag_startSensor = 1;
             }
             else if (throwhsm.bouncestate == BOUNCE_CATCHANDADJUSTPOSTURE)
@@ -73,6 +73,12 @@ void BounceTask(void* argument)
                 positionServo(-85.4, &hDJI[1]);
                 HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET);
                 speedServo(5000, &hDJI[0]);
+                externFlag_startSensor = 0;
+            }
+            else if (throwhsm.bouncestate == BOUNCE_WAITBALL)
+            {
+                positionServo(0, &hDJI[1]);
+                hDJI[0].speedPID.output = 0;
             }
             osDelay(2);
         }

@@ -13,6 +13,8 @@ extern "C" {
  */
 
 #include "DJI.h"
+#include "Caculate.h"
+#include "cmsis_os.h"  //为了不报warning而加
 
 #define CLOSE_STALL_CURRENT -4000.0f    //闭合堵转电流标志//需要修改
 #define CLOSE_SPEED -7200.0f //关爪子速度rpm
