@@ -39,14 +39,14 @@ void ThrowTask(void *argument)
         {
             while (flag_countBraceDelay < 50)
             {
-                speedServo(5000, &hDJI[0]);
+                speedServo(-5000, &hDJI[0]);
                 positionServo(-85.4, &hDJI[1]);
                 hDJI[2].speedPID.output = -5000;
                 hDJI[3].speedPID.output = 5000;
                 ++flag_countBraceDelay;
                 osDelay(2);
             }
-            speedServo(5000, &hDJI[0]);
+            speedServo(-5000, &hDJI[0]);
             positionServo(-85.8, &hDJI[1]);
             hDJI[2].speedPID.output = 0;
             hDJI[3].speedPID.output = 0;

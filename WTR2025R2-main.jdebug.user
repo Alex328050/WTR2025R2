@@ -1,0 +1,32 @@
+
+
+
+Breakpoint=e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/task/ThrowHSMTask.c:109:21, State=BP_STATE_DISABLED
+Breakpoint=e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/lib/dji_motor/DJI.c:181:2, State=BP_STATE_DISABLED
+OpenDocument="DJI.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/lib/dji_motor/DJI.c", Line=152
+OpenDocument="wtr_can.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/lib/dji_motor/wtr_can.c", Line=63
+OpenDocument="main.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/Core/Src/main.c", Line=66
+OpenDocument="ThrowHSMTask.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/task/ThrowHSMTask.c", Line=87
+OpenDocument="startup_stm32f427xx.s", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/startup_stm32f427xx.s", Line=52
+OpenDocument="InitTask.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/usercode/task/InitTask.c", Line=43
+OpenDocument="tasks.c", FilePath="e:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/Middlewares/Third_Party/FreeRTOS/Source/tasks.c", Line=3641
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=468, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, EditorAddress=0x200033EC
+OpenWindow="Watched Data 1", DockArea=LEFT, x=0, y=0, w=475, h=649, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Data Sampling", DockArea=RIGHT, x=0, y=0, w=591, h=251, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
+OpenWindow="Timeline", DockArea=RIGHT, x=0, y=1, w=591, h=397, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=1, CodePaneShown=1, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="364;-69", DataGraphShowNamesAtCursor=0, PowerGraphDrawAsPoints=0, PowerGraphLegendShown=1, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="364;-69", CodeGraphLegendShown=1, CodeGraphLegendPosition="315;0"
+OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=1451, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+SmartViewPlugin="", Page="", Toolbar="Hidden", Window="SmartView 1"
+TableHeader="Data Sampling Table", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time"], ColWidths=[100;100]
+TableHeader="Data Sampling Setup", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Type";"Value";"Min";"Max";"Average";"# Changes";"Min. Change";"Max. Change"], ColWidths=[156;100;100;100;100;100;110;126;126]
+TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
+TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh"], ColWidths=[262;285;100;100]
+TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
+TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[200;100;100;1464]
+WatchedExpression="throwhsm", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="k", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="flag_initComplete", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="rmctl", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="hDJI[1]", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="hDJI[0]", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="hDJI[2]", Window=Watched Data 1

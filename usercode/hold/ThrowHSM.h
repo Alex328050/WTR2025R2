@@ -67,6 +67,7 @@ typedef enum
  */
 typedef enum
 {
+    ERROR_NONE,                     //错误子状态 无错误
     ERROR_DJIINITFAIL,              //错误子状态 大疆电机初始化失败
     ERROR_UNITREEINITFAIL0,         //错误子状态 0号宇树电机初始化失败
     ERROR_UNITREEINITFAIL1,         //错误子状态 1号宇树电机初始化失败

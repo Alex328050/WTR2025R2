@@ -17,7 +17,7 @@ void BounceTask(void* argument)
     uint8_t flag_countPawlBack = 0; //标志变量 用于夹爪快速抓球一段时间后转位置伺服
     for(;;)
     {
-        if (throwhsm.wholestate == WHOLE_BOUNCE)
+        if (throwhsm.wholestate == WHOLE_BOUNCE || throwhsm.wholestate == WHOLE_CONBOUNCE)
         {
             if (throwhsm.bouncestate == BOUNCE_CATCHING)
             {
@@ -28,7 +28,7 @@ void BounceTask(void* argument)
             {
                 positionServo(-85.4, &hDJI[1]);
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
-                Unitree_ChangeState(&myMotor1, 1, 1, 2.2, 0.15, unitreeStartPos1+1.6, 0.55, 0.15);
+                Unitree_ChangeState(&myMotor1, 1, 1, 2.8, 0.15, unitreeStartPos1+1.9, 0.55, 0.15);
                 hDJI[0].speedPID.output = 0;
             }
             else if (throwhsm.bouncestate == BOUNCE_READY)
@@ -50,7 +50,7 @@ void BounceTask(void* argument)
             }
             else if (throwhsm.bouncestate == BOUNCE_BOUNCE)
             {
-                while (flag_countBounceCylinderContract < 100)
+                while (flag_countBounceCylinderContract < 80)
                 {
                     hDJI[1].speedPID.output = 9000;
                     HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_SET);  //拍球气缸推出
@@ -59,7 +59,7 @@ void BounceTask(void* argument)
                 }
                 HAL_GPIO_WritePin(BOUNCE_GPIO_Port,BOUNCE_Pin,GPIO_PIN_RESET);  //拍球气缸收回
                 hDJI[1].speedPID.output = 0;
-                osDelay(150);//传感器信号延迟，由于传感器信号传输需要时间
+                osDelay(50);//传感器信号延迟，由于传感器信号传输需要时间
                 externFlag_startSensor = 1;
             }
             else if (throwhsm.bouncestate == BOUNCE_CATCHANDADJUSTPOSTURE)
@@ -71,8 +71,8 @@ void BounceTask(void* argument)
                     osDelay(2);
                 }
                 positionServo(-85.4, &hDJI[1]);
-                HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET);
-                speedServo(5000, &hDJI[0]);
+                if (throwhsm.wholestate == WHOLE_BOUNCE) HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET); //伸缩气缸收回
+                flag_countBounceCylinderContract = 0;
                 externFlag_startSensor = 0;
             }
             else if (throwhsm.bouncestate == BOUNCE_WAITBALL)

@@ -58,14 +58,6 @@ HAL_StatusTypeDef DJI_Init()
     hDJI[1].speedPID.KI=0.4;
     hDJI[1].speedPID.KD=0.4;
     hDJI[1].speedPID.KP=12;
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (hDJI[i].FdbData.rpm < -50 || hDJI[i].FdbData.rpm > 50 || hDJI[i].FdbData.current >9000 || hDJI[i].FdbData.current < -9000) // 允许小范围浮动
-        {
-            return HAL_ERROR;
-        }
-    }
     return HAL_OK;
 }
 

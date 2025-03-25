@@ -104,6 +104,7 @@ int main(void)
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   RetargetInit(&huart8);
+  DJI_Init();
   throwhsm.wholestate = WHOLE_INITING;
   /* USER CODE END 2 */
 

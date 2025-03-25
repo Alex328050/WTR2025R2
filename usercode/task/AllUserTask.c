@@ -32,7 +32,7 @@ const osThreadAttr_t rmctltask_attributes = {
 osThreadId_t ThrowHSMTaskHandle;
 const osThreadAttr_t ThrowHSMTaskTask_attributes = {
   .name = "ThrowHSMTask",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
 /*宇树电机控制线程*/

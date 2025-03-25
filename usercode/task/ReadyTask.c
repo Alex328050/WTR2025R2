@@ -31,7 +31,8 @@ void ReadyTask(void* argument)
             hDJI[0].speedPID.output = 0;
             hDJI[2].speedPID.output = 0;
             hDJI[3].speedPID.output = 0;
-            positionServo(0, &hDJI[1]);
+            //positionServo(0, &hDJI[1]);
+            speedServo(5000, &hDJI[1]);
             osDelay(2);
         }
         else

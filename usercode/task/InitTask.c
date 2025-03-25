@@ -16,6 +16,8 @@ float unitreeStartPos1 = 0.0;           //宇树电机1号初始位置
 
 void InitTask(void* argument)
 {
+    osDelay(1000); //等待系统稳定
+    //遥控器初始化检测
     //角编码器初始化检测
     if (Encoder_Init() == HAL_ERROR)
     {
@@ -23,28 +25,18 @@ void InitTask(void* argument)
         throwhsm.errorstate = ERROR_ECODERINITFAIL;
     }
 
-    //拍球传感器初始化检测
-    uint8_t i = 0;
-    for (uint8_t i = 0; i < 10; ++i)
-    {
-        if (HAL_GPIO_ReadPin(PNPSensor1_GPIO_Port, PNPSensor1_Pin) != GPIO_PIN_SET ||
-            HAL_GPIO_ReadPin(PNPSensor2_GPIO_Port, PNPSensor2_Pin) != GPIO_PIN_SET)    break;
-    }
-    if (i < 10)
-    {
-        throwhsm.wholestate = WHOLE_ERROR;
-        throwhsm.errorstate = ERROR_SENSORINITFAIL;
-    }
-
     //大疆电机初始化检测
     hDJI[0].motorType = M2006;//自旋电机
     hDJI[1].motorType = M3508;
     hDJI[2].motorType = M2006;//支撑右电机
     hDJI[3].motorType = M2006;
-    if (DJI_Init() == HAL_ERROR)
+    for (int i = 0; i < 4; i++)
     {
-        throwhsm.wholestate = WHOLE_ERROR;
-        throwhsm.errorstate = ERROR_DJIINITFAIL;
+        if (hDJI[i].FdbData.rpm < -50 || hDJI[i].FdbData.rpm > 50 || hDJI[i].FdbData.current >9000 || hDJI[i].FdbData.current < -9000) // 允许小范围浮动
+        {
+            throwhsm.wholestate = WHOLE_ERROR;
+            throwhsm.errorstate = ERROR_DJIINITFAIL;
+        }
     }
     
     //宇树电机初始化检测
@@ -74,13 +66,13 @@ void InitTask(void* argument)
     osDelay(100);
 
     //测量宇树初始位置
-    for(int i = 0; i < 5; i++)
+    for(uint8_t i = 0; i < 5; i++)
     {
         Unitree_UART_tranANDrev(&myMotor0,0,1,0,0,0,0,0 );
         unitreeStartPos0 += myMotor0.data.Pos/UNITREE_REDUCTION_RATE;
         osDelay(5);
     }
-    for(int i = 0; i < 5; i++)
+    for(uint8_t i = 0; i < 5; i++)
     {
         Unitree_UART_tranANDrev(&myMotor1,1,1,0,0,0,0,0 );
         unitreeStartPos1 += myMotor1.data.Pos/UNITREE_REDUCTION_RATE;
@@ -88,7 +80,27 @@ void InitTask(void* argument)
     }
     unitreeStartPos0 /= 5;
     unitreeStartPos1 /= 5;
+    
+    osDelay(1000);
+    //拍球传感器初始化检测
+    uint8_t k = 0;
+    for (; k < 10; ++k)
+    {
+        if (HAL_GPIO_ReadPin(PNPSensor1_GPIO_Port, PNPSensor1_Pin) != GPIO_PIN_SET ||
+            HAL_GPIO_ReadPin(PNPSensor2_GPIO_Port, PNPSensor2_Pin) != GPIO_PIN_SET)    break;
 
+        //k=i;
+    }
+    if (k < 10)
+    {
+        throwhsm.wholestate = WHOLE_ERROR;
+        throwhsm.errorstate = ERROR_SENSORINITFAIL;
+    }
+
+    if(throwhsm.errorstate == ERROR_NONE)
+    {
+        flag_initComplete = 1;
+    }
     for (;;)
     {
         osDelay(10);
