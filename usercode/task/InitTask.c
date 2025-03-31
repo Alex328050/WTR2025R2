@@ -26,13 +26,10 @@ void InitTask(void* argument)
     }
 
     //大疆电机初始化检测
-    hDJI[0].motorType = M2006;//自旋电机
-    hDJI[1].motorType = M3508;
-    hDJI[2].motorType = M2006;//支撑右电机
-    hDJI[3].motorType = M2006;
     for (int i = 0; i < 4; i++)
     {
-        if (hDJI[i].FdbData.rpm < -50 || hDJI[i].FdbData.rpm > 50 || hDJI[i].FdbData.current >9000 || hDJI[i].FdbData.current < -9000) // 允许小范围浮动
+        //对大疆电机是否初始化、数据是否接收到、接收到数据是否异常进行检测
+        if (hDJI[i].FdbData.rpm < -50 || hDJI[i].FdbData.rpm > 50 || hDJI[i].FdbData.current >9000 || hDJI[i].FdbData.current < -9000 || DJI_Init() != HAL_OK || hDJI[i].FdbData.msg_cnt == 0)
         {
             throwhsm.wholestate = WHOLE_ERROR;
             throwhsm.errorstate = ERROR_DJIINITFAIL;
