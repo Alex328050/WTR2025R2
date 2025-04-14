@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-15 23:47:24
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-18 21:48:35
+ * @LastEditTime: 2025-04-11 22:37:42
  */
 
 #include "ReadyTask.h"
@@ -31,8 +31,8 @@ void ReadyTask(void* argument)
             hDJI[0].speedPID.output = 0;
             hDJI[2].speedPID.output = 0;
             hDJI[3].speedPID.output = 0;
-            //positionServo(0, &hDJI[1]);
-            speedServo(5000, &hDJI[1]);
+            positionServo(0, &hDJI[1]);
+            //speedServo(5000, &hDJI[1]);
             osDelay(2);
         }
         else

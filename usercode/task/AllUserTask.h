@@ -31,6 +31,7 @@ extern "C"
 #include "ThrowTask.h"
 #include "ReadyTask.h"
 #include "BounceTask.h"
+#include "RmctlTrasmitTask.h"
 
 void User_FREERTOS_Init(void);
 void HsmTask(void *argument);

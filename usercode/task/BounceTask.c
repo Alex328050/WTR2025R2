@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-23 23:24:07
+ * @LastEditTime: 2025-03-28 18:11:14
  */
 
 #include "BounceTask.h"
@@ -21,12 +21,12 @@ void BounceTask(void* argument)
         {
             if (throwhsm.bouncestate == BOUNCE_CATCHING)
             {
-                positionServo(-85.4, &hDJI[1]);
+                positionServo(-115, &hDJI[1]);
                 speedServo(5000, &hDJI[0]);
             }
             else if (throwhsm.bouncestate == BOUNCE_GETTOPOSITION)
             {
-                positionServo(-85.4, &hDJI[1]);
+                positionServo(-115, &hDJI[1]);
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
                 Unitree_ChangeState(&myMotor1, 1, 1, 2.8, 0.15, unitreeStartPos1+1.9, 0.55, 0.15);
                 hDJI[0].speedPID.output = 0;
@@ -37,13 +37,13 @@ void BounceTask(void* argument)
                 {
                     hDJI[2].speedPID.output = 8000;
                     hDJI[3].speedPID.output = -8000;
-                    positionServo(-85.4, &hDJI[1]);
+                    positionServo(-115, &hDJI[1]);
                     ++flag_countUnitreeRelease;
                     osDelay(2);
                 }
                 hDJI[2].speedPID.output = 0;
                 hDJI[3].speedPID.output = 0;
-                positionServo(-85.4, &hDJI[1]);
+                positionServo(-115, &hDJI[1]);
                 Unitree_ChangeState(&myMotor0, 0, 1, 0, 0, 0, 0, 0);
                 Unitree_ChangeState(&myMotor1, 1, 1, 0, 0, 0, 0, 0);
                 HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_SET);  //伸缩气缸推出
@@ -70,7 +70,7 @@ void BounceTask(void* argument)
                     ++flag_countPawlBack;
                     osDelay(2);
                 }
-                positionServo(-85.4, &hDJI[1]);
+                positionServo(-115, &hDJI[1]);
                 if (throwhsm.wholestate == WHOLE_BOUNCE) HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET); //伸缩气缸收回
                 flag_countBounceCylinderContract = 0;
                 externFlag_startSensor = 0;

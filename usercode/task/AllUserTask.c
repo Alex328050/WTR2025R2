@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-23 23:37:51
+ * @LastEditTime: 2025-03-28 21:07:56
  */
 #include "AllUserTask.h"
 
@@ -91,6 +91,13 @@ const osThreadAttr_t ReadyTask_attributes = {
     .stack_size = 128 * 4,
     .priority = (osPriority_t) osPriorityNormal,
 };
+/*遥控器消息传递线程*/
+osThreadId_t RmctlTrasmitTaskHandle;
+const osThreadAttr_t RmctlTrasmitTask_attributes = {
+    .name = "RmctlTrasmitTask",
+    .stack_size = 128 * 4,
+    .priority = (osPriority_t) osPriorityNormal,
+};
 
 /**
  * @brief 自定义线程初始化函数，在freertos.c的defaulttask调用
@@ -110,6 +117,7 @@ void User_FREERTOS_Init(void)
     ThrowTaskHandle = osThreadNew(ThrowTask, NULL, &ThrowTask_attributes);
     BounceTaskHandle = osThreadNew(BounceTask, NULL, &BounceTask_attributes);
     ReadyTaskHandle = osThreadNew(ReadyTask, NULL, &ReadyTask_attributes);
+    RmctlTrasmitTaskHandle = osThreadNew(RmctlTrasmitTask, NULL, &RmctlTrasmitTask_attributes);
     // chassistaskHandle = osThreadNew(ChassisTask, NULL, &chassistask_attributes);
     // poptaskHandle = osThreadNew(PopTask, NULL, &poptask_attributes);
     
