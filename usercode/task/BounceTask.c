@@ -66,10 +66,12 @@ void BounceTask(void* argument)
             {
                 while (flag_countPawlBack < 50)
                 {
+                    if (throwhsm.wholestate == WHOLE_BOUNCE) speedServo(5000, &hDJI[0]);
                     hDJI[1].speedPID.output = -9000;
                     ++flag_countPawlBack;
                     osDelay(2);
                 }
+                if (throwhsm.wholestate == WHOLE_BOUNCE) speedServo(5000, &hDJI[0]);
                 positionServo(-115, &hDJI[1]);
                 if (throwhsm.wholestate == WHOLE_BOUNCE) HAL_GPIO_WritePin(CYLIN_GPIO_Port,CYLIN_Pin,GPIO_PIN_RESET); //伸缩气缸收回
                 flag_countBounceCylinderContract = 0;

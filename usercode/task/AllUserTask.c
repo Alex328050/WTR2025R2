@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-02 19:35:06
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-28 21:07:56
+ * @LastEditTime: 2025-04-17 00:24:36
  */
 #include "AllUserTask.h"
 
@@ -96,7 +96,7 @@ osThreadId_t RmctlTrasmitTaskHandle;
 const osThreadAttr_t RmctlTrasmitTask_attributes = {
     .name = "RmctlTrasmitTask",
     .stack_size = 128 * 4,
-    .priority = (osPriority_t) osPriorityNormal,
+    .priority = (osPriority_t) osPriorityHigh,
 };
 
 /**

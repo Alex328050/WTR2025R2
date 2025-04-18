@@ -4,9 +4,9 @@
 *                         www.segger.com                             *
 **********************************************************************
 
-File          : E:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main/WTR2025R2-main.jdebug
-Created       : 24 Mar 2025 15:58
-Ozone Version : V3.38d
+File          : D:/Alex/Github/WTR2025R2/WTR2025R2-main.jdebug
+Created       : 17 Apr 2025 00:22
+Ozone Version : V3.38c
 */
 
 /*********************************************************************
@@ -22,14 +22,14 @@ void OnProjectLoad (void) {
   //
   // Dialog-generated settings
   //
-  Project.AddPathSubstitute ("E:/my_project/wtr_working_project/R2CarTest1/WTR2025R2-main", "$(ProjectDir)");
-  Project.AddPathSubstitute ("e:/my_project/wtr_working_project/r2cartest1/wtr2025r2-main", "$(ProjectDir)");
+  Project.AddPathSubstitute ("D:/Alex/Github/WTR2025R2", "$(ProjectDir)");
+  Project.AddPathSubstitute ("d:/alex/github/wtr2025r2", "$(ProjectDir)");
   Project.SetDevice ("STM32F427II");
-  Project.SetHostIF ("USB", "");
+  Project.SetHostIF ("USB", "69409638");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
   Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M4F.svd");
-  Project.AddSvdFile ("$(InstallDir)/Config/Peripherals/STM32F427x.svd");
+  Project.AddSvdFile ("$(InstallDir)/Config/Peripherals/STM32F427.svd");
   //
   // User settings
   //

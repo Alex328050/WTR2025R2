@@ -1,32 +1,26 @@
 
 
-
-Breakpoint=d:/Alex/Github/WTR2025R2/usercode/lib/dji_motor/DJI.c:181:2, State=BP_STATE_DISABLED
-GraphedExpression="caldata.angle", DisplayFormat=DISPLAY_FORMAT_DEC, Color=#e56a6f
+OpenDocument="stm32f4xx_hal_can.c", FilePath="d:/Alex/Github/WTR2025R2/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c", Line=1398
 OpenDocument="startup_stm32f427xx.s", FilePath="d:/Alex/Github/WTR2025R2/startup_stm32f427xx.s", Line=45
-OpenDocument="ThrowTask.c", FilePath="d:/Alex/Github/WTR2025R2/usercode/task/ThrowTask.c", Line=28
-OpenDocument="InitTask.c", FilePath="d:/Alex/Github/WTR2025R2/usercode/task/InitTask.c", Line=28
+OpenDocument="RmctlTrasmitTask.c", FilePath="d:/Alex/Github/WTR2025R2/usercode/task/RmctlTrasmitTask.c", Line=4
+OpenDocument="InitTask.c", FilePath="d:/Alex/Github/WTR2025R2/usercode/task/InitTask.c", Line=2
 OpenDocument="main.c", FilePath="d:/Alex/Github/WTR2025R2/Core/Src/main.c", Line=59
 OpenToolbar="Debug", Floating=0, x=0, y=0
-OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=591, h=264, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
-OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=624, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, EditorAddress=0x200033EC
+OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=591, h=253, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Memory 1", DockArea=BOTTOM, x=0, y=0, w=616, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, EditorAddress=0x200033EC
 OpenWindow="Watched Data 1", DockArea=LEFT, x=0, y=0, w=646, h=1169, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
-OpenWindow="Data Sampling", DockArea=RIGHT, x=0, y=1, w=591, h=364, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
-OpenWindow="Timeline", DockArea=RIGHT, x=0, y=2, w=591, h=539, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=1, CodePaneShown=1, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="357;-89", DataGraphShowNamesAtCursor=0, PowerGraphDrawAsPoints=0, PowerGraphLegendShown=1, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="364;-69", CodeGraphLegendShown=1, CodeGraphLegendPosition="315;0"
-OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=1935, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
+OpenWindow="Data Sampling", DockArea=RIGHT, x=0, y=1, w=591, h=376, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0, VisibleTab=0, UniformSampleSpacing=0
+OpenWindow="Timeline", DockArea=RIGHT, x=0, y=2, w=591, h=538, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=1, DataPaneShown=1, PowerPaneShown=1, CodePaneShown=1, PinCursor="Cursor Movable", TimePerDiv="1 ns / Div", TimeStampFormat="Time", DataGraphDrawAsPoints=0, DataGraphLegendShown=1, DataGraphUniformSampleSpacing=0, DataGraphLegendPosition="364;0", DataGraphShowNamesAtCursor=0, PowerGraphDrawAsPoints=0, PowerGraphLegendShown=1, PowerGraphAvgFilterTime=Off, PowerGraphAvgFilterLen=Off, PowerGraphUniformSampleSpacing=0, PowerGraphLegendPosition="364;-69", CodeGraphLegendShown=1, CodeGraphLegendPosition="315;0"
+OpenWindow="Console", DockArea=BOTTOM, x=1, y=0, w=1943, h=252, FilterBarShown=0, TotalValueBarShown=0, ToolBarShown=0
 SmartViewPlugin="", Page="", Toolbar="Hidden", Window="SmartView 1"
-TableHeader="Data Sampling Table", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";" caldata.angle"], ColWidths=[100;100;100]
+TableHeader="Data Sampling Table", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time"], ColWidths=[100;100]
 TableHeader="Data Sampling Setup", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Type";"Value";"Min";"Max";"Average";"# Changes";"Min. Change";"Max. Change"], ColWidths=[156;100;100;100;100;100;110;126;126]
 TableHeader="Power Sampling", SortCol="None", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Ch 0"], ColWidths=[100;100;100]
 TableHeader="Watched Data 1", SortCol="Expression", SortOrder="ASCENDING", VisibleCols=["Expression";"Value";"Location";"Refresh"], ColWidths=[262;157;100;127]
 TableHeader="RegisterSelectionDialog", SortCol="None", SortOrder="ASCENDING", VisibleCols=[], ColWidths=[]
 TableHeader="TargetExceptionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Address";"Description"], ColWidths=[27;27;27;26]
 WatchedExpression="throwhsm", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="rmctl", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="caldata.angle", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="myMotor0", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="myMotor1", RefreshRate=5, Window=Watched Data 1
 WatchedExpression="hDJI[0]", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="hDJI[1]", RefreshRate=5, Window=Watched Data 1
-WatchedExpression="hDJI[2]", RefreshRate=5, Window=Watched Data 1
 WatchedExpression="hDJI[3]", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="rmctl", RefreshRate=5, Window=Watched Data 1
+WatchedExpression="hDJI[1]", RefreshRate=5, Window=Watched Data 1

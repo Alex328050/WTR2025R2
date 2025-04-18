@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-23 21:15:25
  * @LastEditors: Alex
- * @LastEditTime: 2025-04-14 11:06:24
+ * @LastEditTime: 2025-04-16 23:41:16
  */
 #include "InitTask.h"
 
@@ -24,7 +24,23 @@ void InitTask(void* argument)
         throwhsm.wholestate = WHOLE_ERROR;
         throwhsm.errorstate = ERROR_ECODERINITFAIL;
     }
+    /*
+    //拍球传感器初始化检测
+    uint8_t k = 0;
+    for (; k < 10; ++k)
+    {
+        if (HAL_GPIO_ReadPin(PNPSensor1_GPIO_Port, PNPSensor1_Pin) != GPIO_PIN_SET ||
+            HAL_GPIO_ReadPin(PNPSensor2_GPIO_Port, PNPSensor2_Pin) != GPIO_PIN_SET)    break;
 
+        //k=i;
+    }
+    if (k < 10)
+    {
+        throwhsm.wholestate = WHOLE_ERROR;
+        throwhsm.errorstate = ERROR_SENSORINITFAIL;
+    }
+    */
+    /*
     //大疆电机初始化检测
     for (int i = 0; i < 4; i++)
     {
@@ -35,7 +51,7 @@ void InitTask(void* argument)
             throwhsm.errorstate = ERROR_DJIINITFAIL;
         }
     }
-    
+    */
     //宇树电机初始化检测
     uint8_t j = 0;
     while(Unitree_init(&myMotor0, &huart6, 0) == HAL_ERROR)
@@ -47,7 +63,7 @@ void InitTask(void* argument)
             throwhsm.errorstate = ERROR_UNITREEINITFAIL0;
             break;
         }
-        osDelay(500);
+        osDelay(1000);
     }
     j = 0;
     while(Unitree_init(&myMotor1, &huart6, 1) == HAL_ERROR)
@@ -58,10 +74,10 @@ void InitTask(void* argument)
             throwhsm.wholestate = WHOLE_ERROR;
             throwhsm.errorstate = ERROR_UNITREEINITFAIL1;
         }
-        osDelay(500);
+        osDelay(1000);
     }
     osDelay(100);
-
+    
     //测量宇树初始位置
     for(uint8_t i = 0; i < 5; i++)
     {
@@ -79,21 +95,6 @@ void InitTask(void* argument)
     unitreeStartPos1 /= 5;
     
     osDelay(1000);
-    //拍球传感器初始化检测
-    uint8_t k = 0;
-    for (; k < 10; ++k)
-    {
-        if (HAL_GPIO_ReadPin(PNPSensor1_GPIO_Port, PNPSensor1_Pin) != GPIO_PIN_SET ||
-            HAL_GPIO_ReadPin(PNPSensor2_GPIO_Port, PNPSensor2_Pin) != GPIO_PIN_SET)    break;
-
-        //k=i;
-    }
-    if (k < 10)
-    {
-        throwhsm.wholestate = WHOLE_ERROR;
-        throwhsm.errorstate = ERROR_SENSORINITFAIL;
-    }
-
     if(throwhsm.errorstate == ERROR_NONE)
     {
         flag_initComplete = 1;
