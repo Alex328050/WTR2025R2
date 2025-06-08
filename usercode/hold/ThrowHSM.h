@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-06 22:15:48
  * @LastEditors: Alex
- * @LastEditTime: 2025-03-23 23:24:27
+ * @LastEditTime: 2025-05-29 20:30:55
  */
 
 #ifndef THROWHSM_H
@@ -53,12 +53,14 @@ typedef enum
 {
     BOUNCE_IDLE,                    //拍球子状态 拍球机构未使用
     BOUNCE_CATCHING,                //拍球子状态 夹球
-    BOUNCE_GETTOPOSITION,           //拍球子状态 宇树电机向后发力紧靠 机构到达拍球位置
+    BOUNCE_GETTOPOSITION,           //拍球子状态 宇树电机向后发力紧靠 连续拍球不经过此状态
     BOUNCE_READY,                   //拍球子状态 支撑打开 宇树卸力 拍球气缸推出 准备拍球
     BOUNCE_BOUNCE,                  //拍球子状态 拍球
     BOUNCE_CATCHANDADJUSTPOSTURE,   //拍球子状态 抓球 自旋调整篮球姿态 拍球气缸收回
 
+    
     BOUNCE_WAITBALL,                //连续拍球特有状态 夹爪打开等待放球
+    BOUNCE_RESERVEMOTOR,            //摩擦轮连续拍球特有状态 摩擦轮电机反转
 }BOUNCESTATE;
 
 /**

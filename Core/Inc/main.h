@@ -71,6 +71,8 @@ void Error_Handler(void);
 #define BOUNCE_GPIO_Port GPIOC
 #define PNPSensor1_Pin GPIO_PIN_5
 #define PNPSensor1_GPIO_Port GPIOC
+#define PAWL_Pin GPIO_PIN_0
+#define PAWL_GPIO_Port GPIOB
 #define LED_GREEN_Pin GPIO_PIN_14
 #define LED_GREEN_GPIO_Port GPIOF
 

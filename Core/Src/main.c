@@ -103,11 +103,15 @@ int main(void)
   MX_UART8_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+  // HAL_GPIO_WritePin(BOUNCE_GPIO_Port, BOUNCE_Pin, GPIO_PIN_SET);  //拍球气缸收回
+  // HAL_GPIO_WritePin(CYLIN_GPIO_Port, CYLIN_Pin, GPIO_PIN_SET);  //伸缩气缸收回
   RetargetInit(&huart8);
   hDJI[0].motorType = M2006;//自旋电机
   hDJI[1].motorType = M3508;
   hDJI[2].motorType = M2006;//支撑右电机
   hDJI[3].motorType = M2006;
+  hDJI[4].motorType = M3508;
+  hDJI[5].motorType = M3508;
   DJI_Init();
   throwhsm.wholestate = WHOLE_INITING;
   /* USER CODE END 2 */
@@ -203,7 +207,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM1) {
+  if (htim->Instance == TIM1)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

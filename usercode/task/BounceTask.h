@@ -15,7 +15,7 @@
 #include "Unitree_user.h"
 #include "DJI.h"
 
-extern uint8_t externFlag_startSensor;
+// extern uint8_t externFlag_startSensor;
 
 void BounceTask(void* argument);
 

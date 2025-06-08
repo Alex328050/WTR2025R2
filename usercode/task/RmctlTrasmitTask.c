@@ -42,6 +42,7 @@ void RmctlTrasmitTask(void* argument)
         else if (throwhsm.bouncestate == BOUNCE_READY)                  JoystickSwitchMsg(4, "Ready", &mavlink_bouncestate_msg);
         else if (throwhsm.bouncestate == BOUNCE_BOUNCE)                 JoystickSwitchMsg(4, "Bounce", &mavlink_bouncestate_msg);
         else if (throwhsm.bouncestate == BOUNCE_CATCHANDADJUSTPOSTURE)  JoystickSwitchMsg(4, "CatchAndAdjustPosture", &mavlink_bouncestate_msg);
+        else if (throwhsm.bouncestate == BOUNCE_RESERVEMOTOR)           JoystickSwitchMsg(4, "ReserveMotor", &mavlink_bouncestate_msg);
 
         if      (throwhsm.throwstate == THROW_IDLE)                     JoystickSwitchMsg(3, "Idle", &mavlink_throwstate_msg);
         else if (throwhsm.throwstate == THROW_GATHERSTRENGTH)           JoystickSwitchMsg(3, "GatherStrength", &mavlink_throwstate_msg);

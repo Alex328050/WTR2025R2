@@ -19,13 +19,13 @@ HAL_StatusTypeDef DJI_Init()
 		hDJI[i].speedPID.KP = 12;
 		hDJI[i].speedPID.KI = 0.2;
 		hDJI[i].speedPID.KD = 5;
-		hDJI[i].speedPID.outputMax = 10000;
+		hDJI[i].speedPID.outputMax = 20000;
 
 		// 位置环PID
 		hDJI[i].posPID.KP = 80.0f;
 		hDJI[i].posPID.KI = 1.0f;
 		hDJI[i].posPID.KD = 0.0f;
-		hDJI[i].posPID.outputMax = 10000;
+		hDJI[i].posPID.outputMax = 20000;
 		// hDJI[i].posPID.outputMin = 1500;
 		hDJI[i].f_current = 0;
 		if (hDJI[i].motorType == M3508)
@@ -40,11 +40,11 @@ HAL_StatusTypeDef DJI_Init()
 		hDJI[i].encoder_resolution = 8192.0f;
 	}
     /*夹爪电机参数初始化 */
-    hDJI[0].posPID.outputMax=4000;
+    hDJI[0].posPID.outputMax=8000;
     hDJI[0].posPID.KP=60;
     hDJI[0].posPID.KI=3;
     hDJI[0].posPID.KD=0.0;
-    hDJI[0].speedPID.outputMax=4000;
+    hDJI[0].speedPID.outputMax=8000;
     hDJI[0].speedPID.KI=0.4;
     hDJI[0].speedPID.KD=0.4;
     hDJI[0].speedPID.KP=12;

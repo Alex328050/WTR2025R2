@@ -4,8 +4,8 @@
 *                         www.segger.com                             *
 **********************************************************************
 
-File          : D:/Alex/Github/WTR2025R2/WTR2025R2-main.jdebug
-Created       : 17 Apr 2025 00:22
+File          : D:/Alex/Github/WTR2025R2-main-friction-gear/WTR2025R2-main.jdebug
+Created       : 29 May 2025 21:07
 Ozone Version : V3.38c
 */
 
@@ -22,8 +22,8 @@ void OnProjectLoad (void) {
   //
   // Dialog-generated settings
   //
-  Project.AddPathSubstitute ("D:/Alex/Github/WTR2025R2", "$(ProjectDir)");
-  Project.AddPathSubstitute ("d:/alex/github/wtr2025r2", "$(ProjectDir)");
+  Project.AddPathSubstitute ("D:/Alex/Github/WTR2025R2-main-friction-gear", "$(ProjectDir)");
+  Project.AddPathSubstitute ("d:/alex/github/wtr2025r2-main-friction-gear", "$(ProjectDir)");
   Project.SetDevice ("STM32F427II");
   Project.SetHostIF ("USB", "69409638");
   Project.SetTargetIF ("SWD");

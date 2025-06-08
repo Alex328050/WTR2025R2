@@ -91,6 +91,8 @@ void MX_FREERTOS_Init(void) {
     throwhsm.wholestate = WHOLE_ERROR;
     throwhsm.errorstate = ERROR_CANINITFAIL2;
   }
+  HAL_CAN_Start(&hcan1); // 启动CAN外设
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING); // 启用接收FIFO0的中断
   HAL_CAN_Start(&hcan2); // 启动CAN外设
   HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING); // 启用接收FIFO0的中断
   /* USER CODE END Init */

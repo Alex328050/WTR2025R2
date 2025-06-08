@@ -3,7 +3,7 @@
  * @Author: Alex
  * @Date: 2025-03-23 21:15:25
  * @LastEditors: Alex
- * @LastEditTime: 2025-04-16 23:41:16
+ * @LastEditTime: 2025-05-29 21:21:45
  */
 #include "InitTask.h"
 
@@ -40,7 +40,6 @@ void InitTask(void* argument)
         throwhsm.errorstate = ERROR_SENSORINITFAIL;
     }
     */
-    /*
     //大疆电机初始化检测
     for (int i = 0; i < 4; i++)
     {
@@ -51,7 +50,6 @@ void InitTask(void* argument)
             throwhsm.errorstate = ERROR_DJIINITFAIL;
         }
     }
-    */
     //宇树电机初始化检测
     uint8_t j = 0;
     while(Unitree_init(&myMotor0, &huart6, 0) == HAL_ERROR)

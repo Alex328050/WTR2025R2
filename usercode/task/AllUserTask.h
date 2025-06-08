@@ -33,6 +33,9 @@ extern "C"
 #include "BounceTask.h"
 #include "RmctlTrasmitTask.h"
 
+#define PAWL_POSITION 100
+#define PAWL_ROTATEDETECT 1
+
 void User_FREERTOS_Init(void);
 void HsmTask(void *argument);
 // void ChassisTask(void *argument);
